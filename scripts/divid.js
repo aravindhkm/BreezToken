@@ -2,32 +2,48 @@ const hre = require("hardhat");
 
 async function main() {
 
-  // distributor
-  // await hre.run("verify:verify", {
-  //   address: "0x83Da199702574826EA2880D94Be19503Bfc19D45",
-  //   constructorArguments: [],
-  //   libraries: {
-  //       IterableMapping: "0x073E05039C7bdBF9E5A864bBd6ea33Db01A3d83F"
-  //     },
-  // });
-
- // manager 
-  // const manager = await hre.ethers.getContractFactory("RewardPoolManager");
-  // const managerInstance = await manager.deploy("0x83Da199702574826EA2880D94Be19503Bfc19D45");
-  // await managerInstance.deployed();
-  // console.log("apeborg deployed to:", managerInstance.address); 
-  //  await hre.run("verify:verify", {
-  //   address: managerInstance.address,
-  //   constructorArguments: ["0x83Da199702574826EA2880D94Be19503Bfc19D45"],
-  // });
+  let iterableMappingContract = "0x27bb3cfdf7EfFdEfdFC9Fc6f60845bC548873CDF";
+  let breeZToken = "0x6980967276fdfE1dEC8d30cF8092d0A4f70E13C8";
+  let dividend  = "0x9cF64764fF3ed91CCB461660e6Dc5a7D8570ec90";
+  let reward = "0x3db4FDa1B480105DAE1D26aDe2F75548bB505744";
 
 
-  // reward pool
+  let poolContract;
 
+
+  // const mapping = await hre.ethers.getContractFactory("IterableMapping");
+  // const IterableMapping = await mapping.deploy();
+  // await IterableMapping.deployed();
+  // iterableMappingContract = IterableMapping.address;
+  // console.log("IterableMapping deployed to:", IterableMapping.address); 
    await hre.run("verify:verify", {
-    address: "0x268d9A62B4bAb315a91d1668A7ebA3E60deD974B",
-    constructorArguments: ["0xc45968a401633d16cF03d206058905Fda012B269","0x17Ca0928871b2dB9dd3B2f8b27148a436C24Baa8"],
+    address: iterableMappingContract,
+    constructorArguments: [],
   });
+
+  // const distributor = await hre.ethers.getContractFactory("RewardDistributor", {
+  //   libraries: {
+  //     IterableMapping: iterableMappingContract
+  //   }});
+  // const distributorInstance = await distributor.deploy();
+  // await distributorInstance.deployed();
+  // distributorContract = distributorInstance.address;
+  // console.log("distributorInstance deployed to:", distributorInstance.address); 
+   await hre.run("verify:verify", {
+    address: breeZToken,
+    constructorArguments: [reward],
+        libraries: {
+        IterableMapping: iterableMappingContract
+      },
+  });
+
+
+  await hre.run("verify:verify", {
+    address: dividend,
+    constructorArguments: [reward],
+  });
+
+
 
 }
 main().catch((error) => {
