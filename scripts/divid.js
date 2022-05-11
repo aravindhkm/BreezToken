@@ -16,10 +16,10 @@ async function main() {
   // await IterableMapping.deployed();
   // iterableMappingContract = IterableMapping.address;
   // console.log("IterableMapping deployed to:", IterableMapping.address); 
-   await hre.run("verify:verify", {
-    address: iterableMappingContract,
-    constructorArguments: [],
-  });
+  //  await hre.run("verify:verify", {
+  //   address: iterableMappingContract,
+  //   constructorArguments: [],
+  // });
 
   // const distributor = await hre.ethers.getContractFactory("RewardDistributor", {
   //   libraries: {
@@ -29,13 +29,13 @@ async function main() {
   // await distributorInstance.deployed();
   // distributorContract = distributorInstance.address;
   // console.log("distributorInstance deployed to:", distributorInstance.address); 
-   await hre.run("verify:verify", {
-    address: breeZToken,
-    constructorArguments: [reward],
-        libraries: {
-        IterableMapping: iterableMappingContract
-      },
-  });
+  //  await hre.run("verify:verify", {
+  //   address: breeZToken,
+  //   constructorArguments: [reward],
+  //       libraries: {
+  //       IterableMapping: iterableMappingContract
+  //     },
+  // });
 
 
   await hre.run("verify:verify", {
